@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">tasks_ab</string>
+
+    <string name="title_calendar">Calendar</string>
+    <string name="title_tasks">Tasks</string>
+    <string name="title_more">More</string>
+
+    <string name="floating_button_disk">Add</string>
+
+
+    <string name="add_fragment_hint_name">write the name of the task</string>
+    <string name="add_fragment_hint_description">write the description of the task</string>
+
+
+</resources>

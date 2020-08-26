@@ -10,6 +10,7 @@
 
     <string name="add_fragment_hint_name">write the name of the task</string>
     <string name="add_fragment_hint_description">write the description of the task</string>
+    <string name="add_fragment_button">Это не на всегда</string>
 
 
 </resources>

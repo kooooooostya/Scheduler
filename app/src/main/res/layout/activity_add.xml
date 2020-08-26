@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView android:layout_height="match_parent"
+<androidx.cardview.widget.CardView
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="@dimen/default_padding"
-    tools:context=".ui.AddDialogFragment"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,32 +10,37 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/add_act_edit_text_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/add_fragment_edit_text_name"
             android:hint="@string/add_fragment_hint_name"
-            android:inputType="text"/>
+            android:autofillHints="@string/add_fragment_hint_name"
+            android:inputType="text"
+            />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:gravity="start"
-            android:id="@+id/add_fragment_edit_text_desk"
+            android:id="@+id/add_act_edit_text_desk"
             android:hint="@string/add_fragment_hint_description"
+            android:autofillHints="@string/add_fragment_hint_description"
             android:inputType="textLongMessage"/>
 
 
         <com.example.tasks_ab.Data.InputPanel
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/fragment_add_input_panel"/>
+            android:id="@+id/add_act_input_panel"/>
 
         <Button
-            android:id="@+id/fragment_add_button_confirm"
+            android:id="@+id/add_act_button_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Это не на всегда"
-            android:layout_gravity="center"/>
+            android:text="@string/add_fragment_button"
+            android:background="@android:color/transparent"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_gravity="right"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

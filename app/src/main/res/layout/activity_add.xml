@@ -1,46 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<layout>
+    <androidx.cardview.widget.CardView
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_margin="@dimen/default_padding"
+    android:layout_margin="@dimen/large_padding"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/add_act_edit_text_name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/add_fragment_hint_name"
-            android:autofillHints="@string/add_fragment_hint_name"
-            android:inputType="text"
-            />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:gravity="start"
-            android:id="@+id/add_act_edit_text_desk"
-            android:hint="@string/add_fragment_hint_description"
-            android:autofillHints="@string/add_fragment_hint_description"
-            android:inputType="textLongMessage"/>
+            <EditText
+                android:id="@+id/add_act_edit_text_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_fragment_hint_name"
+                android:autofillHints="@string/add_fragment_hint_name"
+                android:layout_weight="1"
+                android:inputType="text" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:id="@+id/add_act_edit_text_desk"
+                android:hint="@string/add_fragment_hint_description"
+                android:autofillHints="@string/add_fragment_hint_description"
+                android:inputType="textLongMessage" />
 
 
-        <com.example.tasks_ab.Data.InputPanel
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/add_act_input_panel"/>
+            <com.example.tasks_ab.InputPanel
+                android:id="@+id/add_act_input_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                 />
 
-        <Button
-            android:id="@+id/add_act_button_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add_fragment_button"
-            android:background="@android:color/transparent"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_gravity="right"/>
-    </LinearLayout>
+            <Button
+                android:id="@+id/add_act_button_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_fragment_button"
+                android:background="@android:color/transparent"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginEnd="@dimen/large_padding"
+                android:layout_weight="1"
+                android:layout_gravity="end" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="12"/>
+        </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+</layout>

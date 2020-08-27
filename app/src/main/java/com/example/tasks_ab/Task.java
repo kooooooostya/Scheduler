@@ -1,7 +1,9 @@
-package com.example.tasks_ab.Data;
+package com.example.tasks_ab;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.example.tasks_ab.Data.TasksSQLiteOpenHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,13 +16,19 @@ public class Task implements Parcelable {
     private String mName;
     private String mDescription;
     private Boolean mComplete;
+    private int mPriority;
 
+    public static final int NO_PRIORITY = 0;
+    public static final int LOW_PRIORITY = 1;
+    public static final int MEDIUM_PRIORITY = 2;
+    public static final int HIGH_PRIORITY = 3;
 
     public Task(String name, String description, Calendar date, Boolean complete) {
         mCalendar = date;
         mName = name;
         mDescription = description;
         mComplete = complete;
+        mPriority = NO_PRIORITY;
     }
 
     public Task( String name, String description, Calendar date) {
@@ -28,6 +36,7 @@ public class Task implements Parcelable {
         mName = name;
         mDescription = description;
         mComplete = false;
+        mPriority = NO_PRIORITY;
     }
 
     public Task(String name, String description, String dateFullPattern, boolean complete) {
@@ -35,10 +44,15 @@ public class Task implements Parcelable {
         mDescription = description;
         mCalendar = getCalendarFromString(dateFullPattern);
         mComplete = complete;
+        mPriority = NO_PRIORITY;
     }
 
-    public Calendar getCalendar() {
-        return mCalendar;
+    public Task(String name, String description, Calendar calendar, Boolean complete, int priority) {
+        mCalendar = calendar;
+        mName = name;
+        mDescription = description;
+        mComplete = complete;
+        mPriority = priority;
     }
 
     public String getTimeFullPattern(){
@@ -65,6 +79,13 @@ public class Task implements Parcelable {
         return calendar;
     }
 
+    public Calendar getCalendar() {
+        return mCalendar;
+    }
+
+    public int getPriority() {
+        return mPriority;
+    }
 
     public String getName() {
         return mName;
@@ -82,18 +103,12 @@ public class Task implements Parcelable {
         mComplete = complete;
     }
 
-    @Override
-    public String toString() {
-        return "Task{" +
-                ", mName='" + mName + '\'' +
-                ", mDescription='" + mDescription + '\'' +
-                ", mComplete=" + mComplete +
-                '}';
-    }
-
     public void setName(String name) {
         this.mName = name;
     }
+
+
+
 
     public static final Creator<Task> CREATOR = new Creator<Task>() {
 

@@ -1,45 +1,33 @@
 package com.example.tasks_ab.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
-import com.example.tasks_ab.Data.InputPanel;
-import com.example.tasks_ab.Data.Task;
-import com.example.tasks_ab.Data.TasksSQLiteOpenHelper;
-import com.example.tasks_ab.R;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+import com.example.tasks_ab.Task;
+import com.example.tasks_ab.databinding.ActivityAddBinding;
 
 public class AddActivity extends AppCompatActivity {
 
     public static final String IS_INSERTED = "is_inserted";
     public static final String EXTRA_INSERTED_TASK = "inserted_task";
-    private EditText mEditTextName;
-    private EditText mEditTextDesk;
-    private Button mButtonConfirm;
-    private InputPanel mInputPanel;
 
+    ActivityAddBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
+        binding = ActivityAddBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        mButtonConfirm = findViewById(R.id.add_act_button_confirm);
-        mEditTextName = findViewById(R.id.add_act_edit_text_name);
-        mEditTextDesk = findViewById(R.id.add_act_edit_text_desk);
-        mInputPanel = findViewById(R.id.add_act_input_panel);
 
-        mButtonConfirm.setOnClickListener(new View.OnClickListener() {
+        binding.addActButtonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!mEditTextName.getText().toString().equals("")){
+                if(!binding.addActEditTextName.getText().toString().equals("")){
                     addTask();
                 }
             }
@@ -48,10 +36,9 @@ public class AddActivity extends AppCompatActivity {
     }
 
     private void addTask(){
-        //TODO изменение даты
-        Task task = new Task(mEditTextName.getText().toString(),
-                mEditTextDesk.getText().toString(),
-                mInputPanel.getCalendar());
+        Task task = new Task(binding.addActEditTextName.getText().toString(),
+                binding.addActEditTextDesk.getText().toString(),
+                binding.addActInputPanel.getCalendar(), false, binding.addActInputPanel.getPriority());
 
         Intent intent = new Intent();
         //1 - success
@@ -59,7 +46,6 @@ public class AddActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_INSERTED_TASK, task);
         setResult(RESULT_OK, intent);
         finish();
-        // TODO после этого нужно вернуться к предыдущему фрашменту
 
     }
 

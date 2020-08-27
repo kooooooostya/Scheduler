@@ -11,6 +11,9 @@
     <string name="add_fragment_hint_name">write the name of the task</string>
     <string name="add_fragment_hint_description">write the description of the task</string>
     <string name="add_fragment_button">Это не на всегда</string>
+    <string name="cd_select_date">Select date</string>
+    <string name="sd_select_priority">Select priority</string>
+    <string name="cd_move_to_archive">Move to archive</string>
 
 
 </resources>

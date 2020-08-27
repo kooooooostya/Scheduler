@@ -4,6 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="default_padding">5dp</dimen>
-    <dimen name="nav_bar_bottom">50dp</dimen>
+    <dimen name="large_padding">16dp</dimen>
 
 </resources>

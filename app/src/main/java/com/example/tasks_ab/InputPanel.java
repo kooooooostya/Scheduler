@@ -1,4 +1,4 @@
-package com.example.tasks_ab.Data;
+package com.example.tasks_ab;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -8,60 +8,54 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-
-import com.example.tasks_ab.R;
+import com.example.tasks_ab.databinding.InputPanelBinding;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class InputPanel extends LinearLayout implements DatePickerDialog.OnDateSetListener {
-    private ImageButton mButtonPickDate;
-    private ImageButton mButtonSetPriority;
-    private ImageButton mButtonArchive;
-
-    public final int NO_PRIORITY = 0;
-    public final int LOW_PRIORITY = 1;
-    public final int MEDIUM_PRIORITY = 2;
-    public final int HIGH_PRIORITY = 3;
+public class InputPanel extends LinearLayout {
 
     private Calendar mCalendar;
     private int mPriority;
 
-
-
     public InputPanel(final Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        layoutInflater.inflate(R.layout.input_panel, this);
+        assert layoutInflater != null;
+        layoutInflater.inflate(R.layout.input_panel, this, true);
+
+        final InputPanelBinding binding = InputPanelBinding.inflate(LayoutInflater.from(context));
+        binding.getRoot();
 
         mCalendar = Calendar.getInstance();
         mCalendar.setTime(new Date());
 
-        mPriority = NO_PRIORITY;
+        mPriority = Task.NO_PRIORITY;
 
-        mButtonPickDate = findViewById(R.id.input_panel_pick_date_button);
-        mButtonSetPriority = findViewById(R.id.input_panel_set_priority_button);
-        mButtonArchive = findViewById(R.id.input_panel_archive_button);
-
-        mButtonPickDate.setOnClickListener(new OnClickListener() {
+        binding.inputPanelPickDateButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
-                DatePickerDialog datePickerDialog = new DatePickerDialog(context, null,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        mCalendar.set(year, month, dayOfMonth);
+                    }
+                },
                         calendar.get(Calendar.YEAR),
                         calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DATE)
                 );
+
                 datePickerDialog.show();
             }
         });
 
-        mButtonSetPriority.setOnClickListener(new OnClickListener() {
+        binding.inputPanelSetPriorityButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -72,10 +66,11 @@ public class InputPanel extends LinearLayout implements DatePickerDialog.OnDateS
                         mPriority = which + 1;
                     }
                 });
+                builder.create().show();
             }
         });
 
-        mButtonArchive.setOnClickListener(new OnClickListener() {
+        binding.inputPanelArchiveButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO доделать ибо так не пойдет
@@ -85,12 +80,12 @@ public class InputPanel extends LinearLayout implements DatePickerDialog.OnDateS
         });
     }
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        mCalendar.set(year, month, dayOfMonth);
-    }
-
     public Calendar getCalendar() {
         return mCalendar;
     }
+
+    public int getPriority() {
+        return mPriority;
+    }
 }
+
